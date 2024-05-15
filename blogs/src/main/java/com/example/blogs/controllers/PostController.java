@@ -1,6 +1,7 @@
 package com.example.blogs.controllers;
 
 import com.example.blogs.dtos.PostDto;
+import com.example.blogs.dtos.PostRequestDto;
 import com.example.blogs.services.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody @Valid PostDto postDto)
+    public ResponseEntity<PostDto> createPost(@RequestBody @Valid PostRequestDto postDto)
     {
         PostDto addPost = this.postService.createPost(postDto);
         return new ResponseEntity<>(addPost, HttpStatus.CREATED);
@@ -39,7 +40,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostDto> updatePost(@PathVariable Integer postId, @RequestBody PostDto postDto)
+    public ResponseEntity<PostDto> updatePost(@PathVariable Integer postId, @RequestBody PostRequestDto postDto)
     {
         PostDto updatePost = this.postService.updatePost(postId,postDto);
         return new ResponseEntity<>(updatePost,HttpStatus.OK);

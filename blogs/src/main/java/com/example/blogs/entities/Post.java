@@ -2,8 +2,6 @@ package com.example.blogs.entities;
 
 import com.example.blogs.dtos.PostDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;

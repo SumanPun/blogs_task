@@ -1,6 +1,7 @@
 package com.example.blogs.services.impl;
 
 import com.example.blogs.dtos.PostDto;
+import com.example.blogs.dtos.PostRequestDto;
 import com.example.blogs.entities.Category;
 import com.example.blogs.entities.Post;
 import com.example.blogs.exceptions.ResourceNotFoundException;
@@ -21,10 +22,10 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
     @Override
-    public PostDto createPost(PostDto postDto) {
+    public PostDto createPost(PostRequestDto postDto) {
 
         Post post = new Post();
-        post.setName(postDto.getName());
+        post.setName(postDto.getPostName());
         post.setContent(postDto.getContent());
         post.setCreatedOn(LocalDateTime.now());
         Category category = this.categoryRepository.findById(postDto.getCategoryId()).orElseThrow(
@@ -35,11 +36,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto updatePost(Integer postId,PostDto postDto) {
+    public PostDto updatePost(Integer postId,PostRequestDto postDto) {
         Post post = this.postRepository.findById(postId).orElseThrow(
                 ()-> new ResourceNotFoundException("Post","postId",postId)
         );
-        post.setName(postDto.getName());
+        post.setName(postDto.getPostName());
         post.setContent(postDto.getContent());
         Category category = this.categoryRepository.findById(postDto.getCategoryId()).orElseThrow(
                 ()-> new ResourceNotFoundException("Category","categoryId",postDto.getCategoryId())
